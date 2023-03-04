@@ -1,3 +1,27 @@
-- name: Print Rabbitmq
-  debug:
-     msg:  Rabbitmq
+- name: Setuo Erlang Repo
+  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
+
+- name: Install Rabbitmq Repos
+  ansible.builtin.shell:   curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+
+- name: Install Erlang and RabbitMQ
+  ansible.builtin.yum:
+      - rabbitmq-server
+      - erlang
+  state: Installed
+
+- name: Start RabbitMQ Service
+  ansible.builtin.systemd:
+    name: started
+    enabled: yes
+
+- name: Add Application user
+  community.rabbitmq.rabbitmq_user:
+    user: roboshop
+    password: roboshop123
+    vhost: /
+    configure priv: .*
+    read priv: .*
+    write priv: .*
+    state: present
+    
