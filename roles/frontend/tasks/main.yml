@@ -1,6 +1,6 @@
 - name: Install Nginx
   ansible.builtin.yum:
-    name: httpd
+    name: nginx
     state: Installed
     
 - name: Remove Old Content
@@ -8,7 +8,7 @@
     path: /usr/share/nginx/html
     state: absent   
 
-- name: Download and Extract Frontend Contenty
+- name: Download and Extract Frontend Content
   ansible.builtin.unarchive:
     src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
     dest: /usr/share/nginx/html
