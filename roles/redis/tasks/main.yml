@@ -17,6 +17,6 @@
 
 - name: Start Redis
   ansible.builtin.systemd:
-    name: mongod
+    name: redis
     state: started
     enabled: true
