@@ -1,5 +1,6 @@
+
 - name: Create Application User
-  ansible.builtin.file:
+  ansible.builtin.user:
     name: roboshop
 
 - name: Delete old app directory
